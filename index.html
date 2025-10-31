@@ -1,3 +1,14 @@
+Here is the complete, final code for your website.
+
+I have included all the updates:
+
+  * The "best coder" refactor (dynamic clouds, modal).
+  * The Google Apps Script `fetch` code.
+  * Your specific Google Apps Script URL is already in place.
+
+Just copy this entire code, save it as `index.html`, and it will be fully functional.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +23,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
             overflow-x: hidden;
             background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 40%, #7e8ba3 70%, #c9d6df 100%);
             min-height: 100vh;
@@ -26,155 +37,53 @@
             top: 0;
             left: 0;
             z-index: 1;
+            overflow: hidden; 
         }
-
+        
         .cloud {
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 100px;
-            animation-timing-function: linear;
+            animation-timing-function: ease-in-out;
             animation-iteration-count: infinite;
+            filter: blur(5px);
+            box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2);
+            width: 120px; 
+            height: 40px;
+            top: var(--cloud-top, 10%);
+            transform: scale(var(--cloud-scale, 1));
+            animation-name: float;
+            animation-duration: var(--cloud-duration, 40s);
+            animation-delay: var(--cloud-delay, 0s);
+            left: -250px; 
         }
 
         .cloud::before, .cloud::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 100px;
+            filter: blur(5px);
         }
 
-        .cloud-1 {
-            width: 120px;
-            height: 40px;
-            top: 15%;
-            left: -150px;
-            animation: float-1 35s linear infinite;
-        }
-
-        .cloud-1::before {
+        .cloud::before {
             width: 50px;
             height: 50px;
             top: -25px;
             left: 20px;
         }
 
-        .cloud-1::after {
+        .cloud::after {
             width: 60px;
             height: 40px;
             top: -15px;
             right: 20px;
         }
 
-        .cloud-2 {
-            width: 100px;
-            height: 35px;
-            top: 35%;
-            left: -120px;
-            animation: float-2 40s linear infinite;
-            animation-delay: 5s;
-        }
-
-        .cloud-2::before {
-            width: 45px;
-            height: 45px;
-            top: -20px;
-            left: 15px;
-        }
-
-        .cloud-2::after {
-            width: 50px;
-            height: 35px;
-            top: -12px;
-            right: 15px;
-        }
-
-        .cloud-3 {
-            width: 140px;
-            height: 45px;
-            top: 55%;
-            left: -160px;
-            animation: float-3 45s linear infinite;
-            animation-delay: 10s;
-        }
-
-        .cloud-3::before {
-            width: 55px;
-            height: 55px;
-            top: -28px;
-            left: 25px;
-        }
-
-        .cloud-3::after {
-            width: 65px;
-            height: 45px;
-            top: -18px;
-            right: 25px;
-        }
-
-        .cloud-4 {
-            width: 90px;
-            height: 30px;
-            top: 75%;
-            left: -110px;
-            animation: float-4 38s linear infinite;
-            animation-delay: 15s;
-        }
-
-        .cloud-4::before {
-            width: 40px;
-            height: 40px;
-            top: -18px;
-            left: 12px;
-        }
-
-        .cloud-4::after {
-            width: 45px;
-            height: 30px;
-            top: -10px;
-            right: 12px;
-        }
-
-        .cloud-5 {
-            width: 110px;
-            height: 38px;
-            top: 25%;
-            left: -130px;
-            animation: float-5 42s linear infinite;
-            animation-delay: 20s;
-        }
-
-        .cloud-5::before {
-            width: 48px;
-            height: 48px;
-            top: -22px;
-            left: 18px;
-        }
-
-        .cloud-5::after {
-            width: 55px;
-            height: 38px;
-            top: -14px;
-            right: 18px;
-        }
-
-        @keyframes float-1 {
-            to { left: 110%; }
-        }
-
-        @keyframes float-2 {
-            to { left: 110%; }
-        }
-
-        @keyframes float-3 {
-            to { left: 110%; }
-        }
-
-        @keyframes float-4 {
-            to { left: 110%; }
-        }
-
-        @keyframes float-5 {
-            to { left: 110%; }
+        @keyframes float {
+            to {
+                left: 110vw; 
+            }
         }
 
         .container {
@@ -282,6 +191,169 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
+        .social-section {
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease-out 1.2s both;
+        }
+
+        .social-title {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn.youtube:hover {
+            background: #FF0000;
+            border-color: #FF0000;
+        }
+
+        .social-btn.facebook:hover {
+            background: #1877F2;
+            border-color: #1877F2;
+        }
+
+        .social-btn.twitter:hover {
+            background: #1DA1F2;
+            border-color: #1DA1F2;
+        }
+
+        .social-btn.instagram:hover {
+            background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+            border-color: #E1306C;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.show-modal {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            color: #1e3c72;
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.show-modal .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .modal-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #2a5298;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #7e8ba3;
+            background: none;
+            border: none;
+            cursor: pointer;
+            line-height: 1;
+        }
+        
+        .notify-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .email-input {
+            padding: 1rem;
+            font-family: 'Georgia', 'Times New Roman', Times, serif;
+            font-size: 1rem;
+            border: 2px solid #c9d6df;
+            border-radius: 10px;
+            color: #1e3c72;
+        }
+        
+        .email-input:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 10px rgba(42, 82, 152, 0.2);
+        }
+        
+        .submit-notify-btn {
+            padding: 1rem;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .submit-notify-btn:hover {
+            background: #2a5298;
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -338,12 +410,7 @@
 </head>
 <body>
     <div class="sky">
-        <div class="cloud cloud-1"></div>
-        <div class="cloud cloud-2"></div>
-        <div class="cloud cloud-3"></div>
-        <div class="cloud cloud-4"></div>
-        <div class="cloud cloud-5"></div>
-    </div>
+        </div>
 
     <div class="container">
         <h1 class="logo">Ownvarsity</h1>
@@ -352,64 +419,185 @@
 
         <div class="countdown">
             <div class="time-unit">
-                <span class="time-value" id="days">90</span>
+                <span class="time-value" id="days">--</span>
                 <span class="time-label">Days</span>
             </div>
             <div class="time-unit">
-                <span class="time-value" id="hours">00</span>
+                <span class="time-value" id="hours">--</span>
                 <span class="time-label">Hours</span>
             </div>
             <div class="time-unit">
-                <span class="time-value" id="minutes">00</span>
+                <span class="time-value" id="minutes">--</span>
                 <span class="time-label">Minutes</span>
             </div>
             <div class="time-unit">
-                <span class="time-value" id="seconds">00</span>
+                <span class="time-value" id="seconds">--</span>
                 <span class="time-label">Seconds</span>
             </div>
         </div>
 
         <p class="launch-date" id="launch-date"></p>
 
-        <button class="notify-btn" onclick="notifyMe()">Notify Me at Launch</button>
+        <button class="notify-btn">Notify Me at Launch</button> 
+
+        <div class="social-section">
+            <p class="social-title">FOLLOW US ON</p>
+            <div class="social-links">
+                <a href="https://youtube.com/@yourchannel" target="_blank" class="social-btn youtube" title="YouTube">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                <a href="https://facebook.com/yourpage" target="_blank" class="social-btn facebook" title="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/youraccount" target="_blank" class="social-btn twitter" title="Twitter">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://instagram.com/youraccount" target="_blank" class="social-btn instagram" title="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
     </div>
 
+    <div class="modal-overlay" id="notify-modal">
+        <div class="modal-content">
+            <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            <h2>Be the First to Know</h2>
+            <p>Enter your email, and we'll send you a one-time notification the moment we go live.</p>
+            <form class="notify-form" id="notify-form">
+                <input type="email" class="email-input" id="email-input" name="email" placeholder="your-email@example.com" required>
+                <button type="submit" class="submit-notify-btn">Notify Me 🚀</button>
+            </form>
+        </div>
+    </div>
+
+
     <script>
-        // Set launch date to 90 days from now
-        const now = new Date();
-        const launchDate = new Date(now.getTime() + (90 * 24 * 60 * 60 * 1000));
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Display launch date
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('launch-date').textContent = 
-            'Launching on ' + launchDate.toLocaleDateString('en-US', options);
+            // --- 1. COUNTDOWN LOGIC (FIXED) ---
+            
+            // Set a *fixed* launch date 90 days from Oct 31, 2025
+            const launchDate = new Date('January 29, 2026 00:00:00');
+            const launchTime = launchDate.getTime(); 
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('launch-date').textContent = 
+                'Launching on ' + launchDate.toLocaleDateString('en-US', options);
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const countdownInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = launchTime - now;
 
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.querySelector('.countdown').innerHTML = '<h2 style="color: white; font-size: 3rem;">🎉 We\'re Live!</h2>';
+                    document.querySelector('.launch-date').style.display = 'none';
+                    return;
+                }
 
-            if (distance < 0) {
-                document.querySelector('.countdown').innerHTML = '<h2 style="color: white; font-size: 3rem;">🎉 We\'re Live!</h2>';
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            }, 1000);
+
+
+            // --- 2. DYNAMIC CLOUD GENERATION ---
+
+            const sky = document.querySelector('.sky');
+            const numClouds = 15;
+
+            for (let i = 0; i < numClouds; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                
+                cloud.style.setProperty('--cloud-top', `${Math.random() * 90}%`);
+                cloud.style.setProperty('--cloud-scale', `${Math.random() * 0.6 + 0.5}`); 
+                cloud.style.setProperty('--cloud-duration', `${Math.random() * 30 + 40}s`);
+                cloud.style.setProperty('--cloud-delay', `${Math.random() * -50}s`); 
+                
+                sky.appendChild(cloud);
             }
-        }
 
-        // Update countdown every second
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
 
-        function notifyMe() {
-            alert('Thank you for your interest! We\'ll notify you when Ownvarsity launches. 🚀');
-        }
+            // --- 3. MODAL & FORM LOGIC ---
+
+            const modalOverlay = document.getElementById('notify-modal');
+            const notifyBtn = document.querySelector('.notify-btn');
+            const closeBtn = document.getElementById('modal-close-btn');
+            const notifyForm = document.getElementById('notify-form');
+
+            // Open the modal
+            notifyBtn.addEventListener('click', () => {
+                modalOverlay.classList.add('show-modal');
+            });
+
+            // Close the modal (with X button)
+            closeBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('show-modal');
+            });
+
+            // Close the modal (by clicking the background)
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('show-modal');
+                }
+            });
+
+            // Handle the form submission
+            notifyForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                
+                // This is your unique URL!
+                const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxIN94eD4abD8VjUpvqiA29apK7ACaJ3myVlWUowxh2ulbi0Wykdzgotcl6FSEcdC-8DA/exec";
+                
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const formData = new FormData(notifyForm);
+
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert('Thank you! We\'ll notify ' + data.email + ' at launch. 🚀');
+                        modalOverlay.classList.remove('show-modal');
+                        notifyForm.reset();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error);
+                    alert('An error occurred. Please try again.');
+                })
+                .finally(() => {
+                    submitBtn.textContent = 'Notify Me 🚀';
+                    submitBtn.disabled = false;
+                });
+            });
+            
+        });
     </script>
 </body>
 </html>
+```
