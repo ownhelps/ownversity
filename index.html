@@ -1,59 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ownversity - Coming Soon</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #001f3f, #0074d9);
-      color: white;
-      font-family: "Poppins", sans-serif;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    h1 {
-      font-size: 3em;
-      margin: 0;
-    }
-    p {
-      font-size: 1.5em;
-      opacity: 0.8;
-    }
-    #countdown {
-      font-size: 2em;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ownvarsity - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 40%, #7e8ba3 70%, #c9d6df 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .sky {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+        }
+
+        .cloud-1 {
+            width: 120px;
+            height: 40px;
+            top: 15%;
+            left: -150px;
+            animation: float-1 35s linear infinite;
+        }
+
+        .cloud-1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 20px;
+        }
+
+        .cloud-1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 20px;
+        }
+
+        .cloud-2 {
+            width: 100px;
+            height: 35px;
+            top: 35%;
+            left: -120px;
+            animation: float-2 40s linear infinite;
+            animation-delay: 5s;
+        }
+
+        .cloud-2::before {
+            width: 45px;
+            height: 45px;
+            top: -20px;
+            left: 15px;
+        }
+
+        .cloud-2::after {
+            width: 50px;
+            height: 35px;
+            top: -12px;
+            right: 15px;
+        }
+
+        .cloud-3 {
+            width: 140px;
+            height: 45px;
+            top: 55%;
+            left: -160px;
+            animation: float-3 45s linear infinite;
+            animation-delay: 10s;
+        }
+
+        .cloud-3::before {
+            width: 55px;
+            height: 55px;
+            top: -28px;
+            left: 25px;
+        }
+
+        .cloud-3::after {
+            width: 65px;
+            height: 45px;
+            top: -18px;
+            right: 25px;
+        }
+
+        .cloud-4 {
+            width: 90px;
+            height: 30px;
+            top: 75%;
+            left: -110px;
+            animation: float-4 38s linear infinite;
+            animation-delay: 15s;
+        }
+
+        .cloud-4::before {
+            width: 40px;
+            height: 40px;
+            top: -18px;
+            left: 12px;
+        }
+
+        .cloud-4::after {
+            width: 45px;
+            height: 30px;
+            top: -10px;
+            right: 12px;
+        }
+
+        .cloud-5 {
+            width: 110px;
+            height: 38px;
+            top: 25%;
+            left: -130px;
+            animation: float-5 42s linear infinite;
+            animation-delay: 20s;
+        }
+
+        .cloud-5::before {
+            width: 48px;
+            height: 48px;
+            top: -22px;
+            left: 18px;
+        }
+
+        .cloud-5::after {
+            width: 55px;
+            height: 38px;
+            top: -14px;
+            right: 18px;
+        }
+
+        @keyframes float-1 {
+            to { left: 110%; }
+        }
+
+        @keyframes float-2 {
+            to { left: 110%; }
+        }
+
+        @keyframes float-3 {
+            to { left: 110%; }
+        }
+
+        @keyframes float-4 {
+            to { left: 110%; }
+        }
+
+        @keyframes float-5 {
+            to { left: 110%; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            animation: fadeInDown 1s ease-out 0.2s both;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            animation: fadeInDown 1s ease-out 0.4s both;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .time-unit {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 2rem 2.5rem;
+            border-radius: 20px;
+            min-width: 140px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .time-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            display: block;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .launch-date {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .notify-btn {
+            background: white;
+            color: #1e3c72;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 1s both;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .notify-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .slogan {
+                font-size: 1.2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .countdown {
+                gap: 1rem;
+            }
+
+            .time-unit {
+                padding: 1.5rem 1.8rem;
+                min-width: 110px;
+            }
+
+            .time-value {
+                font-size: 2.5rem;
+            }
+
+            .time-label {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>🚀 Ownversity</h1>
-  <p>We’re launching soon!</p>
-  <div id="countdown"></div>
+    <div class="sky">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+    </div>
 
-  <script>
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 90);
+    <div class="container">
+        <h1 class="logo">Ownvarsity</h1>
+        <p class="slogan">Problem Solver · Value Creator</p>
+        <p class="tagline">Something Revolutionary is Coming</p>
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = targetDate - now;
+        <div class="countdown">
+            <div class="time-unit">
+                <span class="time-value" id="days">90</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">Seconds</span>
+            </div>
+        </div>
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "We're live!";
-        return;
-      }
+        <p class="launch-date" id="launch-date"></p>
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").innerText = days + " days left";
-    }
+        <button class="notify-btn" onclick="notifyMe()">Notify Me at Launch</button>
+    </div>
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60 * 24);
-  </script>
+    <script>
+        // Set launch date to 90 days from now
+        const now = new Date();
+        const launchDate = new Date(now.getTime() + (90 * 24 * 60 * 60 * 1000));
+
+        // Display launch date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('launch-date').textContent = 
+            'Launching on ' + launchDate.toLocaleDateString('en-US', options);
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                document.querySelector('.countdown').innerHTML = '<h2 style="color: white; font-size: 3rem;">🎉 We\'re Live!</h2>';
+            }
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        function notifyMe() {
+            alert('Thank you for your interest! We\'ll notify you when Ownvarsity launches. 🚀');
+        }
+    </script>
 </body>
 </html>
